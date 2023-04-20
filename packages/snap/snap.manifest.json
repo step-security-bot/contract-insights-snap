@@ -1,13 +1,13 @@
 {
   "version": "0.1.0",
-  "description": "An example Snap written in TypeScript.",
-  "proposedName": "TypeScript Example Snap",
+  "description": "A Snap that retrieves contract metadata from the Kleros Curate registries.",
+  "proposedName": "Kleros Curate metadata",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
   },
   "source": {
-    "shasum": "0xq+5/F+SizTm2jaVed+X7BAVTySwa8Zi3OMuCAsZ3s=",
+    "shasum": "JSP77g8ngCQbesMYx2mdDWdpeLe5Kn3HybIN4NEskzg=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -18,11 +18,10 @@
     }
   },
   "initialPermissions": {
-    "snap_dialog": {},
-    "endowment:rpc": {
-      "dapps": true,
-      "snaps": false
-    }
+    "endowment:transaction-insight": {
+      "allowTransactionOrigin": true
+    },
+    "endowment:network-access": {}
   },
   "manifestVersion": "0.1"
 }
