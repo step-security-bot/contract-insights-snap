@@ -25,6 +25,7 @@
     "test": "echo \"TODO\""
   },
   "dependencies": {
+    "@metamask/snaps-cli": "^0.30.0",
     "@metamask/snaps-ui": "^0.30.0",
     "cross-env": "^7.0.3"
   },
