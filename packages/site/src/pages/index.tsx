@@ -154,7 +154,7 @@ const Index = () => {
             content={{
               title: 'Reconnect',
               description:
-                'Click to update connect to Metamask Flask and update your Snap',
+                'Click to update connect to Metamask Flask and update your Snaps',
               button: (
                 <ReconnectButton
                   onClick={handleConnectClick}
