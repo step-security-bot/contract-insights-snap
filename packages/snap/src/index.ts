@@ -96,7 +96,12 @@ export const onTransaction: OnTransactionHandler = async ({
     const litems2 = graphQLData2.data.litems;
 
     const insights: Insight[] = [
-      { value: '**Verified tag:** ' + litems1[0].key0 + '(' + litems1[0].key2 + ')' },
+      {
+        value:
+          '**Verified tag:** ' + (litems1.length > 0
+            ? litems1[0].key0 + '(' + litems1[0].key2 + ')'
+            : '_No tag found_'),
+      },
       {
         value:
           '**Contract verified for this domain:** ' +
