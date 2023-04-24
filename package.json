@@ -2,7 +2,7 @@
   "name": "kleros-contract-insights-snap",
   "version": "0.1.4",
   "description": "",
-  "homepage": "https://kleros.io",
+  "homepage": "https://old.kleros.io/contract-insights-snap/",
   "bugs": {
     "url": "https://kleros.io"
   },
@@ -24,7 +24,7 @@
     "start": "yarn workspaces foreach --parallel --interlaced --verbose run start",
     "test": "echo \"TODO\"",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d packages/site/build"
+    "deploy": "gh-pages -d packages/site/public"
   },
   "dependencies": {
     "@metamask/snaps-cli": "^0.30.0",
