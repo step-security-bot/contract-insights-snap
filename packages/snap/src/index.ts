@@ -98,7 +98,8 @@ export const onTransaction: OnTransactionHandler = async ({
     const insights: Insight[] = [
       {
         value:
-          '**Verified tag:** ' + (litems1.length > 0
+          '**Verified tag:** ' +
+          (litems1.length > 0
             ? litems1[0].key0 + '(' + litems1[0].key2 + ')'
             : '_No tag found_'),
       },
