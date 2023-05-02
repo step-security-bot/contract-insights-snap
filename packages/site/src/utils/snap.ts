@@ -61,4 +61,9 @@ export const sendHello = async () => {
   });
 };
 
-export const isLocalSnap = (snapId: string) => snapId.startsWith('local:');
+export const isLocalSnap = (snapId?: string) => {
+  if (snapId == null) {
+    return false;
+  }
+  return snapId.startsWith('local:');
+};

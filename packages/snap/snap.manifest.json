@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.3",
   "description": "A Snap that retrieves contract metadata from the Kleros Curate registries.",
   "proposedName": "Kleros Curate metadata",
   "repository": {
@@ -7,12 +7,12 @@
     "url": "https://github.com/MetaMask/template-snap-monorepo.git"
   },
   "source": {
-    "shasum": "46HZ+QVRpvVP/997550yzJQJNUJMi7ydwmfOyJaXtl4=",
+    "shasum": "eJUlnX6RAE+wTa9GrJ5CRev2ZOZhbYAA1nSQEEqoeBE=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/icon.svg",
-        "packageName": "snap",
+        "packageName": "kleros-contracts-insights-snap",
         "registry": "https://registry.npmjs.org/"
       }
     }
