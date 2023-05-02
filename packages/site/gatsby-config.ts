@@ -5,7 +5,7 @@ const config: GatsbyConfig = {
   jsxRuntime: 'automatic',
 
   // Add the pathPrefix setting
-  pathPrefix: '/contract-insights-snap',
+  pathPrefix: '',
 
   plugins: [
     'gatsby-plugin-svgr',
