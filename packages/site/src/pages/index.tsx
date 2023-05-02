@@ -46,6 +46,11 @@ const SearchInput = styled.input`
   flex: 1;
 `;
 
+const Subtext = styled.p`
+font-size: 1rem;
+color: #888;
+`
+
 const SearchResultList = styled.ul`
   list-style-type: none;
   padding: 0;
@@ -150,7 +155,7 @@ const Index = () => {
       <SearchBarContainer>
         <SearchInput
           type="text"
-          placeholder="Search NPM packages"
+          placeholder="kleros-contracts-insights-snap"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         /><InstallButton
@@ -161,6 +166,7 @@ const Index = () => {
           Install {selectedPackage} Snap
         </InstallButton>
       </SearchBarContainer>
+      <Subtext>Results with ✅ are successfully registered on <a href="https://curate.kleros.io/tcr/100/0xfdB66aD9576842945431c27fe8cB5ef8ed5Cb8BB">this registry</a> on Kleros Curate.</Subtext>
       <SearchResultList>
         {filteredPackages.map((pkg) => {
           const isVerified = packages.some((item) => item.key0 === pkg.name);
@@ -170,7 +176,7 @@ const Index = () => {
               onClick={() => handlePackageClick(pkg.name)}
             >
               {pkg.name}
-              {isVerified && <VerifiedBadge>✓</VerifiedBadge>}
+              {isVerified && <VerifiedBadge>✅</VerifiedBadge>}
             </SearchResultItem>
           );
         })}
