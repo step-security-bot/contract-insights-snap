@@ -2,13 +2,13 @@
   "name": "kleros-contract-insights-snap",
   "version": "0.1.4",
   "description": "",
-  "homepage": "https://old.kleros.io/contract-insights-snap/",
+  "homepage": "https://contract-insight-snap.kleros.builders/",
   "bugs": {
     "url": "https://kleros.io"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MetaMask/template-snap-monorepo.git"
+    "url": "git+https://github.com/kleros/contract-insights-snap.git"
   },
   "license": "(MIT-0 OR Apache-2.0)",
   "author": "",
