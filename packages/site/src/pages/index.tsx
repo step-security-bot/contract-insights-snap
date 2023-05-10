@@ -10,13 +10,19 @@ import { InstallButton } from '../components';
 import axios from 'axios';
 //import { defaultSnapOrigin } from '../config';
 
+const Body = styled.body`
+  background-color: #F8F9FA;
+  font-family: Arial, sans-serif;
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
-  margin-top: 7.6rem;
-  margin-bottom: 7.6rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  padding: 2rem;
   ${({ theme }) => theme.mediaQueries.small} {
     padding-left: 2.4rem;
     padding-right: 2.4rem;
@@ -36,13 +42,15 @@ const Span = styled.span`
   color: ${(props) => props.theme.colors.primary.default};
 `;
 
+
 const SearchInput = styled.input`
-  font-size: 2.5rem;
+  font-size: 2rem;
   width: 50%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+  padding-left: 5%;
   border: 1px solid ${({ theme }) => theme.colors.border.default};
   border-radius: ${({ theme }) => theme.radii.default};
+  box-shadow: 0px 0px 10px #ddd;
+  height: 100%;
   flex: 1;
 `;
 
@@ -54,6 +62,11 @@ color: #888;
 const SearchResultList = styled.ul`
   list-style-type: none;
   padding: 0;
+  margin-top: 2rem;
+  width: 80%;
+  box-shadow: 0px 0px 10px #ddd;
+  border-radius: 10px;
+  background-color: #fff;
 `;
 
 const SearchResultItem = styled.li`
@@ -72,7 +85,8 @@ const SearchBarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 80%;
-` ;
+  height: 5rem;
+`;
 
 
 const Index = () => {
@@ -148,44 +162,42 @@ const Index = () => {
   };
 
   return (
-    <Container>
-      <Heading>
-        Explore Metamask Snaps, <Span>verified by Kleros</Span>
-      </Heading>
-      <SearchBarContainer>
-        <SearchInput
-          type="text"
-          placeholder="kleros-contracts-insights-snap"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        /><InstallButton
-          onClick={handleConnectClick}
-          snapsNpmName={selectedPackage}
-          disabled={!selectedPackage}
-        >
-          Install {selectedPackage} Snap
-        </InstallButton>
-      </SearchBarContainer>
-      <Subtext>Results with ✅ are successfully registered on <a href="https://curate.kleros.io/tcr/100/0xfdB66aD9576842945431c27fe8cB5ef8ed5Cb8BB">this registry</a> on Kleros Curate.</Subtext>
-      <SearchResultList>
-        {filteredPackages.map((pkg) => {
-          const isVerified = packages.some((item) => item.key0 === pkg.name);
-          return (
-            <SearchResultItem
-              key={pkg.name}
-              onClick={() => handlePackageClick(pkg.name)}
-            >
-              {pkg.name}
-              {isVerified && <VerifiedBadge>✅</VerifiedBadge>}
-            </SearchResultItem>
-          );
-        })}
-      </SearchResultList>
-
-
-
-
-    </Container>
+    <Body>
+      <Container>
+        <Heading>
+          Explore Metamask Snaps, <Span>verified by Kleros</Span>
+        </Heading>
+        <SearchBarContainer>
+          <SearchInput
+            type="text"
+            placeholder="kleros-contracts-insights-snap"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          /><InstallButton
+            onClick={handleConnectClick}
+            snapsNpmName={selectedPackage}
+            disabled={!selectedPackage}
+          >
+            Install {selectedPackage} Snap
+          </InstallButton>
+        </SearchBarContainer>
+        <Subtext>Results with ✅ are successfully registered on <a href="https://curate.kleros.io/tcr/100/0xfdB66aD9576842945431c27fe8cB5ef8ed5Cb8BB">this registry</a> on Kleros Curate.</Subtext>
+        <SearchResultList>
+          {filteredPackages.map((pkg) => {
+            const isVerified = packages.some((item) => item.key0 === pkg.name);
+            return (
+              <SearchResultItem
+                key={pkg.name}
+                onClick={() => handlePackageClick(pkg.name)}
+              >
+                {pkg.name}
+                {isVerified && <VerifiedBadge>✅</VerifiedBadge>}
+              </SearchResultItem>
+            );
+          })}
+        </SearchResultList>
+      </Container>
+    </Body>
   );
 };
 

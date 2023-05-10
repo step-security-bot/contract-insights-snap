@@ -43,6 +43,28 @@ const Button = styled.button`
   }
 `;
 
+const ButtonForInstall = styled.button`
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  height: 100%;
+  &:hover {
+    background-color: #1e075f;
+  }
+  &:disabled {
+    background-color: #f2e3ff;
+    cursor: not-allowed;
+    color: #000000;
+  }
+`;
+
+
 const ButtonText = styled.span`
   margin-left: 1rem;
 `;
@@ -89,10 +111,10 @@ export const ConnectButton = (props: ComponentProps<typeof Button>) => {
 
 export const InstallButton = (props: ComponentProps<typeof Button>) => {
   return (
-    <Button {...props}>
+    <ButtonForInstall {...props}>
       <FlaskFox />
       <ButtonText>Install <i>{props.snapsNpmName}</i> </ButtonText>
-    </Button>
+    </ButtonForInstall>
   );
 };
 export const ReconnectButton = (props: ComponentProps<typeof Button>) => {
