@@ -62,10 +62,14 @@ export const Header = ({
   return (
     <HeaderWrapper>
       <LogoWrapper>
-        <KlerosLogo color={theme.colors.icon.default} size={75} />
+        <KlerosLogo color={theme.colors.icon.default} size={36} />
+
       </LogoWrapper>
       <RightContainer>
-
+        <Toggle
+          onToggle={handleToggleClick}
+          defaultChecked={getThemePreference()}
+        />
         <HeaderButtons state={state} onConnectClick={handleConnectClick} />
       </RightContainer>
     </HeaderWrapper>

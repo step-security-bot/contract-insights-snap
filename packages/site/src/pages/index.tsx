@@ -10,7 +10,7 @@ import { InstallButton } from '../components';
 import axios from 'axios';
 //import { defaultSnapOrigin } from '../config';
 
-const Body = styled.body`
+const Body = styled.div`
   background-color: #F8F9FA;
   font-family: Arial, sans-serif;
 `;

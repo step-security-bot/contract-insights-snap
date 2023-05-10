@@ -56,6 +56,7 @@ const ButtonForInstall = styled.button`
   height: 100%;
   &:hover {
     background-color: #1e075f;
+    color: #FFFFFF;
   }
   &:disabled {
     background-color: #f2e3ff;
