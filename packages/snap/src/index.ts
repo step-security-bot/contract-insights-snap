@@ -32,7 +32,7 @@ export const onTransaction: OnTransactionHandler = async ({
     return null;
   }
 
-  //For address tags
+  //For address tags (need to build a toggle for different chains)
   const query1 = ` 
       query {
         litems(where:{registry:"0x76944a2678a0954a610096ee78e8ceb8d46d5922", key1_contains_nocase: "${
@@ -51,6 +51,7 @@ export const onTransaction: OnTransactionHandler = async ({
   const domain = getDomainFromUrl(
     transactionOrigin ? transactionOrigin : 'NO_DOMAIN',
   );
+  
   //For Ledger CDN registry
   const query2 = `
     query {
@@ -67,6 +68,8 @@ export const onTransaction: OnTransactionHandler = async ({
     }
   `;
 
+  console.log("Tag query: "+JSON.stringify(query1));
+  console.log("CDN query: "+JSON.stringify(query2));
   async function fetchGraphQLData(query: string): Promise<GraphQLResponse> {
     const response = await fetch(
       'https://api.thegraph.com/subgraphs/name/greenlucid/legacy-curate-xdai',
