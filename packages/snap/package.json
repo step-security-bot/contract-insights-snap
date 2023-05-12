@@ -1,6 +1,6 @@
 {
   "name": "kleros-contracts-insights-snap",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "The Kleros contracts insights Snap, built for Metamask Flask!",
   "repository": {
     "type": "git",
