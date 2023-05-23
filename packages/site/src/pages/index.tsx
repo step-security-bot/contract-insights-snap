@@ -145,8 +145,7 @@ const Index = () => {
   };
 
   const handleConnectClick = async () => {
-    //const defaultSnapOrigin = `npm:${selectedPackage}`; 
-    const defaultSnapOrigin = `local:http://localhost:8080`; 
+    const defaultSnapOrigin = `npm:${selectedPackage}`; 
 
     try {
       await connectSnap(defaultSnapOrigin);
