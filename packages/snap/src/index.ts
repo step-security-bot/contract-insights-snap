@@ -32,27 +32,30 @@ export const onTransaction: OnTransactionHandler = async ({
     return null;
   }
 
-  //For address tags (need to build a toggle for different chains)
+  console.log(JSON.stringify(transaction));
+
+  //All 3 queries below have a hardcoded registry, as only one contract is used for each data type for contracts on all chains.
+  //1. For querying Address Tags
   const query1 = ` 
-      query {
-        litems(where:{registry:"0x76944a2678a0954a610096ee78e8ceb8d46d5922", key1_contains_nocase: "${
-          transaction.to as string
-        }" ,status_in:[Registered], disputed:false})
-      {
-          itemID
-          key0
-          key1
-          key2
-          key3
-          key4
-        }
+    query {
+      litems(where:{registry:"0xa64e8949ad24259526a32d4bfd53a9f2154ae6bb", key0_contains_nocase: "${chainId}:${
+    transaction.to as string
+  }" , status_in:[Registered], disputed:false})
+    {
+        itemID
+        key0
+        key1
+        key2
+        key3
+        key4
       }
+    }
     `;
   const domain = getDomainFromUrl(
     transactionOrigin ? transactionOrigin : 'NO_DOMAIN',
   );
-  
-  //For Ledger CDN registry
+
+  //2. For querying Contract Domain Name entries
   const query2 = `
     query {
       litems(where:{registry:"0x957a53a994860be4750810131d9c876b2f52d6e1", key0_contains_nocase: "${chainId}:${
@@ -68,8 +71,22 @@ export const onTransaction: OnTransactionHandler = async ({
     }
   `;
 
-  console.log("Tag query: "+JSON.stringify(query1));
-  console.log("CDN query: "+JSON.stringify(query2));
+  //3. For querying if the contract is a Token contract
+  const query3 = `
+    query {
+      litems(where:{registry:"0x3d0ab3323fe71954e81897f29bd257e47b12b923", key0_contains_nocase: "${chainId}:${
+    transaction.to as string
+  }" , key1: "${domain}", status_in:[Registered], disputed:false})
+    {
+        itemID
+        key0
+        key1
+        key2
+
+      }
+    }
+  `;
+
   async function fetchGraphQLData(query: string): Promise<GraphQLResponse> {
     const response = await fetch(
       'https://api.thegraph.com/subgraphs/name/greenlucid/legacy-curate-xdai',
@@ -98,13 +115,24 @@ export const onTransaction: OnTransactionHandler = async ({
     const graphQLData2 = await fetchGraphQLData(query2);
     const litems2 = graphQLData2.data.litems;
 
+    const graphQLData3 = await fetchGraphQLData(query3);
+    const litems3 = graphQLData3.data.litems;
+
     const insights: Insight[] = [
+      //retrieving on the first address tag, assuming that the TCR ensures there will not be more than one valid tag per contract
       {
         value:
-          '**Verified tag:** ' +
+          '**Project Name:** ' +
+          (litems1.length > 0
+            ? litems1[0].key0 + '(' + litems1[0].key1 + ')'
+            : '_Not found_'),
+      },
+      {
+        value:
+          '**Contract Tag:** ' +
           (litems1.length > 0
             ? litems1[0].key0 + '(' + litems1[0].key2 + ')'
-            : '_No tag found_'),
+            : '_Not found_'),
       },
       {
         value:
@@ -112,6 +140,15 @@ export const onTransaction: OnTransactionHandler = async ({
           (litems2.length > 0 ? 'Yes (' + domain + ')' : 'No'),
       },
     ];
+
+    //As the minority of contracts, only adding this entry if the token has a positive result from the tokens registry.
+    //Maybe we should add this line as well showing N.A. if a token is not verified, but we will have to look at maybe function signatures to know if a contract is a token contract or not.
+    if (litems3.length > 0) {
+      insights.push({
+        value:
+          '**Token contract details:** ' + litems3[0] + ' (' + litems3[2] + ')',
+      });
+    }
 
     return insights;
   }
