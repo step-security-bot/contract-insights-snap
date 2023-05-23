@@ -123,15 +123,14 @@ export const onTransaction: OnTransactionHandler = async ({
       {
         value:
           '**Project Name:** ' +
-          (litems1.length > 0
-            ? litems1[0].key0 + '(' + litems1[0].key1 + ')'
-            : '_Not found_'),
+          (litems1.length > 0 ? litems1[0].key1 : '_Not found_'),
       },
       {
         value:
           '**Contract Tag:** ' +
           (litems1.length > 0
-            ? litems1[0].key0 + '(' + litems1[0].key2 + ')'
+            ? litems1[0].key2 +
+              (litems1[0].key3 ? '(' + litems1[0].key3 + ')' : '')
             : '_Not found_'),
       },
       {
@@ -141,8 +140,8 @@ export const onTransaction: OnTransactionHandler = async ({
       },
     ];
 
-    //As the minority of contracts, only adding this entry if the token has a positive result from the tokens registry.
-    //Maybe we should add this line as well showing N.A. if a token is not verified, but we will have to look at maybe function signatures to know if a contract is a token contract or not.
+    //As the minority of contracts are not tokens, only adding this entry if the query3 has a positive result from the tokens registry.
+    //Right now, it doesn't show this line at all if a token is not verified. Maybe we can improve it to distinguish between token and non-token contracts (function signatures maybe?)
     if (litems3.length > 0) {
       insights.push({
         value:
